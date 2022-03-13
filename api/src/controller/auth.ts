@@ -21,6 +21,7 @@ export const Register = async (req: Request, res: Response) => {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     email: req.body.email,
+    image: req.body.image,
     password: await bcrypt.hash(req.body.password, 10),
   });
 

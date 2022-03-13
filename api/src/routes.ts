@@ -3,7 +3,7 @@ import { Register, Login, getUser, Logout, updateUser, updatePassword } from "./
 import { createPost, deletePost, getPost, getPosts, updatePost } from "./controller/post";
 import { createComment, deleteComment } from "./controller/comment";
 import { authMiddleware } from "./middlewares/authMiddleware";
-import { isPostOwner } from "./middlewares/guardsMiddleware";
+import { isPostOwner, isCommentOwner } from "./middlewares/guardsMiddleware";
 
 export const routes = (router: Router) => {
     router.post('/api/register', Register);
@@ -20,5 +20,5 @@ export const routes = (router: Router) => {
     router.delete('/api/posts/:id', authMiddleware,isPostOwner, deletePost)
 
     router.post('/api/posts/:id/comments', authMiddleware, createComment)
-    router.delete('/api/posts/:id/comments/:commentId', authMiddleware, deleteComment)
+    router.delete('/api/posts/:id/comments/:commentId', authMiddleware, isCommentOwner, deleteComment);
 }
