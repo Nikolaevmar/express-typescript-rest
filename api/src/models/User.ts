@@ -4,6 +4,7 @@ interface User{
   first_name: String;
   last_name: String;
   email: String;
+  image: String;
   password: String;
 }
 
@@ -11,6 +12,7 @@ const UserSchema: Schema = new Schema({
   first_name: { type: String, required: true },
   last_name: { type: String, required: true },
   email: { type: String, required: true },
+  image: {type: String, required:true},
   password: { type: String, required: true },
 });
 
