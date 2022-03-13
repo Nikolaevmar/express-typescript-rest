@@ -6,15 +6,18 @@ export const getPosts = async (req: Request, res: Response) => {
   const posts = await Post.find({})
     .limit((limit as number) * 1)
     .skip(((page as number) - 1) * (limit as number))
-    .populate({
-      path: "owner",
-    });
+    .populate("owner");
   res.send(posts);
 };
 
 export const getPost = async (req: Request, res: Response) => {
   const id = req.params.id;
-  const post = await Post.findById(id).populate("owner");
+  const post = await Post.findById(id).populate({
+      path: "comments",
+      populate: {
+          path: "author",
+      },
+  })
   res.send(post);
 };
 

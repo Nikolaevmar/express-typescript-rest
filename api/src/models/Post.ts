@@ -14,7 +14,13 @@ const PostSchema: Schema = new Schema({
   description: { type: String, required: true },
   image: { type: String },
   owner: { type: Schema.Types.ObjectId, ref: "User" },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
+  comments: [
+      {
+          type: Schema.Types.ObjectId,
+          ref: "Comment"
+      }
+  ]
 });
 
 export default mongoose.model<Post>("Post", PostSchema);

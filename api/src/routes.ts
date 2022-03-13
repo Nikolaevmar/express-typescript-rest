@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { Register, Login, getUser, Logout, updateUser, updatePassword } from "./controller/auth";
 import { createPost, deletePost, getPost, getPosts, updatePost } from "./controller/post";
+import { createComment, deleteComment } from "./controller/comment";
 import { authMiddleware } from "./middlewares/authMiddleware";
 import { isPostOwner } from "./middlewares/guardsMiddleware";
 
@@ -17,4 +18,7 @@ export const routes = (router: Router) => {
     router.post('/api/posts', authMiddleware, createPost)
     router.put('/api/posts/:id', authMiddleware,isPostOwner, updatePost)
     router.delete('/api/posts/:id', authMiddleware,isPostOwner, deletePost)
+
+    router.post('/api/posts/:id/comments', authMiddleware, createComment)
+    router.delete('/api/posts/:id/comments/:commentId', authMiddleware, deleteComment)
 }
